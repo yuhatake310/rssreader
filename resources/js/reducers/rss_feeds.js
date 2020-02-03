@@ -1,11 +1,12 @@
-import { READ_RSSFEEDS } from '../actions'
+import { RSS_FETCH_SUCCEEDED } from '../actions';
 
 export default (feeds = {}, action) => {
     switch (action.type) {
-        case READ_RSSFEEDS:
-            console.log(action)
-            return feeds
+        case RSS_FETCH_SUCCEEDED:
+            return Object.assign({}, feeds, {
+                feeds: action.payload,
+            });
         default:
-            return feeds
+            return feeds;
     }
-}
+};

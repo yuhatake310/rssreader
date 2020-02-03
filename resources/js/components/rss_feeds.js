@@ -1,25 +1,47 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { readRssFeeds } from '../actions'
+import _ from 'lodash';
+
+import { readRssFeeds } from '../actions';
 
 class RssFeeds extends Component {
     componentDidMount() {
-        this.props.readRssFeeds()
+        this.props.readRssFeeds();
+    }
+
+    renderFeeds() {
+        return _.map(this.props.feeds, feed => (
+            <tr key={feed.date}>
+                <td>{feed.title[0]}</td>
+                <td>{feed.site[0]}</td>
+                <td>{feed.date}</td>
+            </tr>
+        ));
     }
 
     render() {
-        const props = this.props
-
         return (
-            <React.Fragment>
-                <div>{console.log(props.feeds)}</div>
-            </React.Fragment>
-        )
+            <table>
+                <thead>
+                    <tr>
+                        <th>記事タイトル</th>
+                        <th>サイト名</th>
+                        <th>更新日時</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {this.renderFeeds()}
+                </tbody>
+            </table>
+        );
     }
 }
 
-const mapStateToProps = state => ({ feeds: state.feeds });
+const mapStateToProps = state => {
+    return { feeds: state.rss_feeds.feeds };
+};
 
 const mapDispatchToProps = ({ readRssFeeds });
 
-export default connect(mapStateToProps, mapDispatchToProps)(RssFeeds)
+export default connect(mapStateToProps, mapDispatchToProps)(RssFeeds);
