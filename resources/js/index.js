@@ -5,9 +5,11 @@ import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import { createLogger } from 'redux-logger';
 import rootSaga from './sagas/rootSaga';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import reducer from './reducers';
 import RssFeeds from './components/rss_feeds';
+import RssFeedsNew from './components/rss_feeds_new';
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const sagaMiddleware = createSagaMiddleware();
@@ -30,7 +32,12 @@ sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
     <Provider store={store}>
-        <RssFeeds />
+        <BrowserRouter>
+            <Switch>
+                <Route exact path="/" component={RssFeeds} />
+                <Route exact path="/feeds/new" component={RssFeedsNew} />
+            </Switch>
+        </BrowserRouter>
     </Provider>,
     document.getElementById('rssfeeds')
 );

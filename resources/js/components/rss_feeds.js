@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
+import { Link } from 'react-router-dom';
 
 import { readRssFeeds } from '../actions';
 
@@ -21,19 +22,23 @@ class RssFeeds extends Component {
 
     render() {
         return (
-            <table>
-                <thead>
-                    <tr>
-                        <th>記事タイトル</th>
-                        <th>サイト名</th>
-                        <th>更新日時</th>
-                    </tr>
-                </thead>
+            <React.Fragment>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>記事タイトル</th>
+                            <th>サイト名</th>
+                            <th>更新日時</th>
+                        </tr>
+                    </thead>
 
-                <tbody>
-                    {this.renderFeeds()}
-                </tbody>
-            </table>
+                    <tbody>
+                        {this.renderFeeds()}
+                    </tbody>
+                </table >
+
+                <Link to="/feeds/new">New Feed</Link>
+            </React.Fragment>
         );
     }
 }
