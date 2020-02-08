@@ -23,6 +23,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('feeds');
+    }
+
+    public function add()
+    {
+        return view('feed_new');
     }
 }
