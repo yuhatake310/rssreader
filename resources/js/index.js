@@ -6,6 +6,7 @@ import createSagaMiddleware from 'redux-saga';
 import { createLogger } from 'redux-logger';
 import rootSaga from './sagas/rootSaga';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import reducer from './reducers';
 import RssFeeds from './components/rss_feeds';
@@ -31,13 +32,15 @@ const store = createStore(
 sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
-    <Provider store={store}>
-        <BrowserRouter>
-            <Switch>
-                <Route exact path="/" component={RssFeeds} />
-                <Route exact path="/feeds/new" component={RssFeedsNew} />
-            </Switch>
-        </BrowserRouter>
-    </Provider>,
+    <MuiThemeProvider>
+        <Provider store={store}>
+            <BrowserRouter>
+                <Switch>
+                    <Route exact path="/" component={RssFeeds} />
+                    <Route exact path="/feeds/new" component={RssFeedsNew} />
+                </Switch>
+            </BrowserRouter>
+        </Provider>
+    </MuiThemeProvider>,
     document.getElementById('rssfeeds')
 );

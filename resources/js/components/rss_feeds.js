@@ -2,6 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { Link } from 'react-router-dom';
+import {
+    Table,
+    TableBody,
+    TableHeader,
+    TableHeaderColumn,
+    TableRow,
+    TableRowColumn,
+} from 'material-ui/Table';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 
 import { readRssFeeds } from '../actions';
 
@@ -12,37 +22,47 @@ class RssFeeds extends Component {
 
     renderFeeds() {
         return _.map(this.props.feeds, feed => (
-            <tr key={feed.title[0]}>
-                <td>
+            <TableRow key={feed.title[0]}>
+                <TableRowColumn>
                     <a href={feed.url[0]} target="_blank">
                         {feed.title[0]}
                     </a>
-                </td>
-                <td>{feed.site[0]}</td>
-                <td>{feed.date}</td>
-            </tr >
+                </TableRowColumn>
+                <TableRowColumn>{feed.site[0]}</TableRowColumn>
+                <TableRowColumn>{feed.date}</TableRowColumn>
+            </TableRow >
         ));
     }
 
     render() {
+        const style = {
+            position: "fixed",
+            right: 12,
+            bottom: 12,
+        };
         return (
             <React.Fragment>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>記事タイトル</th>
-                            <th>サイト名</th>
-                            <th>更新日時</th>
-                        </tr>
-                    </thead>
+                <FloatingActionButton style={style} containerElement={<Link to="/feeds/new" />}>
+                    <ContentAdd />
+                </FloatingActionButton>
 
-                    <tbody>
+                <Table>
+                    <TableHeader
+                        displaySelectAll={false}
+                        adjustForCheckbox={false}
+                    >
+                        <TableRow>
+                            <TableHeaderColumn>記事タイトル</TableHeaderColumn>
+                            <TableHeaderColumn>サイト名</TableHeaderColumn>
+                            <TableHeaderColumn>更新日時</TableHeaderColumn>
+                        </TableRow>
+                    </TableHeader>
+
+                    <TableBody displayRowCheckbox={false}>
                         {this.renderFeeds()}
-                    </tbody>
-                </table >
-
-                <Link to="/feeds/new">New Feed</Link>
-            </React.Fragment>
+                    </TableBody>
+                </Table >
+            </React.Fragment >
         );
     }
 }
