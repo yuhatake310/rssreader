@@ -1,8 +1,7 @@
-import { call, all } from 'redux-saga/effects';
-import { watchReadRssFeeds } from './RssFeeds';
+import { fork } from 'redux-saga/effects';
+import { watchReadRssFeeds, watchAddFeed } from './RssFeeds';
 
 export default function* rootSaga() {
-    yield all([
-        call(watchReadRssFeeds),
-    ]);
+    yield fork(watchReadRssFeeds);
+    yield fork(watchAddFeed);
 }

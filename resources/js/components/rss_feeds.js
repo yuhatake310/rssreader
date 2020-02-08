@@ -12,7 +12,7 @@ class RssFeeds extends Component {
 
     renderFeeds() {
         return _.map(this.props.feeds, feed => (
-            <tr key={feed.date}>
+            <tr key={feed.title[0]}>
                 <td>{feed.title[0]}</td>
                 <td>{feed.site[0]}</td>
                 <td>{feed.date}</td>

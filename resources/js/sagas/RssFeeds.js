@@ -1,7 +1,7 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
-import { getRssFeeds } from '../services/api';
-import { READ_RSSFEEDS } from '../actions';
-import { rssFetchSucceeded, rssFetchFailed } from '../actions';
+import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
+import { getRssFeeds, addFeed } from '../services/api';
+import { READ_RSSFEEDS, ADD_FEED } from '../actions';
+import { rssFetchSucceeded, rssFetchFailed, addFeedSucceeded, addFeedFailed } from '../actions';
 
 function* fetchRss() {
     try {
@@ -16,4 +16,18 @@ function* fetchRss() {
 
 export function* watchReadRssFeeds() {
     yield takeEvery(READ_RSSFEEDS, fetchRss);
+}
+
+function* addUrl(action) {
+    const urlData = action.value.url;
+    const response = yield call(addFeed, urlData);
+    if (response) {
+        yield put(addFeedSucceeded(response.data));
+    } else {
+        yield put(addFeedFailed('エラー'));
+    }
+}
+
+export function* watchAddFeed() {
+    yield takeLatest(ADD_FEED, addUrl);
 }
