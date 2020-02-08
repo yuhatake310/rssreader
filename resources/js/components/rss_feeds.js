@@ -13,10 +13,14 @@ class RssFeeds extends Component {
     renderFeeds() {
         return _.map(this.props.feeds, feed => (
             <tr key={feed.title[0]}>
-                <td>{feed.title[0]}</td>
+                <td>
+                    <a href={feed.url[0]} target="_blank">
+                        {feed.title[0]}
+                    </a>
+                </td>
                 <td>{feed.site[0]}</td>
                 <td>{feed.date}</td>
-            </tr>
+            </tr >
         ));
     }
 

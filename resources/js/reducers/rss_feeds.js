@@ -8,17 +8,8 @@ import {
 export default (feeds = {}, action) => {
     switch (action.type) {
         case RSS_FETCH_SUCCEEDED:
-            return Object.assign({}, feeds, {
-                feeds: action.payload,
-            });
         case RSS_FETCH_FAILED:
-            return Object.assign({}, feeds, {
-                feeds: action.payload,
-            });
         case ADD_FEED_SUCCEEDED:
-            return Object.assign({}, feeds, {
-                feeds: action.payload,
-            });
         case ADD_FEED_FAILED:
             return Object.assign({}, feeds, {
                 feeds: action.payload,

@@ -97745,7 +97745,10 @@ function (_Component) {
       return lodash__WEBPACK_IMPORTED_MODULE_2___default.a.map(this.props.feeds, function (feed) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
           key: feed.title[0]
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, feed.title[0]), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, feed.site[0]), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, feed.date));
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          href: feed.url[0],
+          target: "_blank"
+        }, feed.title[0])), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, feed.site[0]), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, feed.date));
       });
     }
   }, {
@@ -97884,7 +97887,11 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var handleSubmit = this.props.handleSubmit;
+      var _this$props = this.props,
+          handleSubmit = _this$props.handleSubmit,
+          pristine = _this$props.pristine,
+          submitting = _this$props.submitting,
+          invalid = _this$props.invalid;
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
         onSubmit: handleSubmit(this.onSubmit)
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(redux_form__WEBPACK_IMPORTED_MODULE_3__["Field"], {
@@ -97895,7 +97902,7 @@ function (_Component) {
       })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
         type: "submit",
         value: "\u767B\u9332",
-        disabled: false
+        disabled: pristine || submitting || invalid
       }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
         to: "/"
       }, "\u623B\u308B")));
@@ -98023,20 +98030,8 @@ __webpack_require__.r(__webpack_exports__);
 
   switch (action.type) {
     case _actions__WEBPACK_IMPORTED_MODULE_0__["RSS_FETCH_SUCCEEDED"]:
-      return Object.assign({}, feeds, {
-        feeds: action.payload
-      });
-
     case _actions__WEBPACK_IMPORTED_MODULE_0__["RSS_FETCH_FAILED"]:
-      return Object.assign({}, feeds, {
-        feeds: action.payload
-      });
-
     case _actions__WEBPACK_IMPORTED_MODULE_0__["ADD_FEED_SUCCEEDED"]:
-      return Object.assign({}, feeds, {
-        feeds: action.payload
-      });
-
     case _actions__WEBPACK_IMPORTED_MODULE_0__["ADD_FEED_FAILED"]:
       return Object.assign({}, feeds, {
         feeds: action.payload

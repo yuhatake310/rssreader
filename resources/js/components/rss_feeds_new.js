@@ -27,14 +27,14 @@ class RssFeedsNew extends Component {
     }
 
     render() {
-        const { handleSubmit } = this.props;
+        const { handleSubmit, pristine, submitting, invalid } = this.props;
 
         return (
             <form onSubmit={handleSubmit(this.onSubmit)}>
                 <div><Field label="URL" name="url" type="url" component={this.renderField} /></div>
 
                 <div>
-                    <input type="submit" value="登録" disabled={false} />
+                    <input type="submit" value="登録" disabled={pristine || submitting || invalid} />
                     <Link to="/">戻る</Link>
                 </div>
             </form>
