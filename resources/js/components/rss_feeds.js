@@ -21,6 +21,13 @@ class RssFeeds extends Component {
     }
 
     renderFeeds() {
+        if (this.props.feeds === undefined) {
+            return (
+                <TableRow>
+                    <TableRowColumn>右下のボタンからRSSフィードを登録してください。</TableRowColumn>
+                </TableRow>
+            );
+        }
         return _.map(this.props.feeds, feed => (
             <TableRow key={feed.title[0]}>
                 <TableRowColumn>

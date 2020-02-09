@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use App\RssFeed;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RssFeedController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -60,7 +66,7 @@ class RssFeedController extends Controller
             return $result;
         }
 
-        $rssList = RssFeed::pluck('url');
+        $rssList = RssFeed::where('user_id', Auth::id())->pluck('url');
 
         $rssdataRaw = multiRequest($rssList);
 
@@ -223,6 +229,7 @@ class RssFeedController extends Controller
     {
         $rssfeed = new RssFeed;
         $rssfeed->url = $request->url;
+        $rssfeed->user_id = Auth::id();
         $rssfeed->save();
 
         return response()->json($rssfeed, 201);

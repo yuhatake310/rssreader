@@ -115243,6 +115243,10 @@ function (_Component) {
   }, {
     key: "renderFeeds",
     value: function renderFeeds() {
+      if (this.props.feeds === undefined) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(material_ui_Table__WEBPACK_IMPORTED_MODULE_4__["TableRow"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(material_ui_Table__WEBPACK_IMPORTED_MODULE_4__["TableRowColumn"], null, "\u53F3\u4E0B\u306E\u30DC\u30BF\u30F3\u304B\u3089RSS\u30D5\u30A3\u30FC\u30C9\u3092\u767B\u9332\u3057\u3066\u304F\u3060\u3055\u3044\u3002"));
+      }
+
       return lodash__WEBPACK_IMPORTED_MODULE_2___default.a.map(this.props.feeds, function (feed) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(material_ui_Table__WEBPACK_IMPORTED_MODULE_4__["TableRow"], {
           key: feed.title[0]
