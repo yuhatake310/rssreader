@@ -115565,9 +115565,6 @@ __webpack_require__.r(__webpack_exports__);
 
   switch (action.type) {
     case _actions__WEBPACK_IMPORTED_MODULE_0__["RSS_FETCH_SUCCEEDED"]:
-    case _actions__WEBPACK_IMPORTED_MODULE_0__["RSS_FETCH_FAILED"]:
-    case _actions__WEBPACK_IMPORTED_MODULE_0__["ADD_FEED_SUCCEEDED"]:
-    case _actions__WEBPACK_IMPORTED_MODULE_0__["ADD_FEED_FAILED"]:
       return Object.assign({}, feeds, {
         feeds: action.payload
       });
