@@ -25,9 +25,4 @@ class HomeController extends Controller
     {
         return view('feeds');
     }
-
-    public function add()
-    {
-        return view('feed_new');
-    }
 }

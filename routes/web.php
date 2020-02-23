@@ -13,5 +13,8 @@
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('feeds');
-Route::get('/feeds/new', 'HomeController@add')->name('feed_add');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/{any}', function () {
+        return view('feeds');
+    })->where('any', '.*');
+});
